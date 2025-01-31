@@ -4,35 +4,52 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "project_content")
-data class ProjectContent(
+class ProjectContent(
+    id: Long = 0,
+    project: Project, // 연관된 Project 엔티티
+    type: String,
+    content: String,
+    subContent: String,
+    backgroundColor: String,
+    font: String,
+    fontSize: String,
+    animation: String
+) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    val id: Long = 0,
+    val id: Long = id
 
     @ManyToOne(fetch = FetchType.LAZY) // 다대일 관계 매핑
     @JoinColumn(name = "project_id", referencedColumnName = "id", nullable = false) // 외래 키 매핑
-    val project: Project, // 연관된 Project 엔티티
+    var project: Project = project // 연관된 Project 엔티티
+        private set
 
     @Column(name = "type")
-    val type: String,
+    var type: String = type
+        private set
 
     @Column(name = "content")
-    val content: String,
+    var content: String = content
+        private set
 
     @Column(name = "sub_content")
-    val subContent: String,
+    var subContent: String = subContent
+        private set
 
     @Column(name = "background_color")
-    val backgroundColor: String,
+    var backgroundColor: String = backgroundColor
+        private set
 
     @Column(name = "font")
-    val font: String,
+    var font: String = font
+        private set
 
     @Column(name = "font_size")
-    val fontSize: String,
+    var fontSize: String = fontSize
+        private set
 
     @Column(name = "animation")
-    val animation: String
-
-)
+    var animation: String = animation
+        private set
+}

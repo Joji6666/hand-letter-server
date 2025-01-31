@@ -6,26 +6,35 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "project")
-data class Project(
+class Project(
+    id: Long = 0,
+    url: String,
+    createUserId: Long,
+    effect: String,
+    endDate: LocalDateTime
+) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    val id: Long = 0,
+    val id: Long = id
 
     @Column(name = "url", unique = true)
-    val url: String,
+    var url: String = url
+        private set
 
     @Column(name = "create_user_id")
-    val createUserId: Long,
+    var createUserId: Long = createUserId
+        private set
 
     @Column(name = "effect")
-    val effect: String,
+    var effect: String = effect
+        private set
 
     @Column(name = "end_date")
-    val endDate: LocalDateTime,
+    var endDate: LocalDateTime = endDate
+        private set
 
     @CreatedDate
     @Column(name = "create_date")
     val createDate: LocalDateTime = LocalDateTime.now()
-
-)
+}

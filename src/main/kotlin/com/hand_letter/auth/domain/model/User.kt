@@ -6,20 +6,25 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "user")
-data class User(
+class User(
+    id: Long = 0,
+    userId: String,
+    password: String,
+    createDate: LocalDateTime = LocalDateTime.now()
+) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    val id: Long = 0,
+    val id: Long = id
 
     @Column(name = "user_id", unique = true)
-    val userId: String,
+    val userId: String = userId
 
     @Column(name = "password")
-    val password: String,
+    var password: String = password
+        private set
 
     @CreatedDate
     @Column(name = "create_date")
-    val createDate: LocalDateTime = LocalDateTime.now()
-
-)
+    val createDate: LocalDateTime = createDate
+}
