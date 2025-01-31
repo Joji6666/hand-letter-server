@@ -1,21 +1,17 @@
 package com.ez_studio.config
 
-import com.ez_studio.config.jwt.JwtTokenFilter
 import com.ez_studio.config.jwt.JwtTokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Lazy
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService
 import org.springframework.security.oauth2.client.registration.ClientRegistration
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository
 import org.springframework.security.oauth2.core.AuthorizationGrantType
 import org.springframework.security.web.SecurityFilterChain
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
 @EnableWebSecurity
@@ -25,7 +21,6 @@ class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider) {
     fun passwordEncoder(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()
     }
-
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -48,8 +43,6 @@ class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider) {
             }
             .httpBasic { httpBasic -> httpBasic.disable() }
             .formLogin { formLogin -> formLogin.disable() }
-
-
 
         return http.build()
     }
@@ -75,6 +68,4 @@ class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider) {
     fun oidcUserService(): OidcUserService {
         return OidcUserService()
     }
-
-
 }

@@ -23,8 +23,6 @@ class JwtTokenFilter(@Lazy private val jwtTokenProvider: JwtTokenProvider) : Onc
         if (token != null && jwtTokenProvider.validateToken(token)) {
             val auth = jwtTokenProvider.getAuthentication(token)
             SecurityContextHolder.getContext().authentication = auth
-
-
         }
         filterChain.doFilter(request, response)
     }

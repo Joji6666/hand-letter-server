@@ -1,17 +1,16 @@
 package com.ez_studio.config.jwt
 
-import org.springframework.beans.factory.annotation.Value
-import java.util.Date
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import jakarta.servlet.http.HttpServletRequest
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Lazy
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Component
+import java.util.Date
 
 @Component
 class JwtTokenProvider(@Lazy private val userDetailsService: UserDetailsService) {
@@ -21,7 +20,6 @@ class JwtTokenProvider(@Lazy private val userDetailsService: UserDetailsService)
 
     @Value("\${jwt.expiration}")
     private var validityInMilliseconds: Long = 3600000 // 1시간
-
 
     fun createToken(email: String): String {
         val claims: Claims = Jwts.claims().setSubject(email)
@@ -58,7 +56,8 @@ class JwtTokenProvider(@Lazy private val userDetailsService: UserDetailsService)
         val bearerToken = req.getHeader("Authorization")
         return if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             bearerToken.substring(7)
-        } else null
-
+        } else {
+            null
+        }
     }
 }

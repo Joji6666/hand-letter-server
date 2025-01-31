@@ -7,20 +7,17 @@ import org.springframework.stereotype.Service
 
 @Service
 class AuthService(
-    private  val userRepository: UserRepository
+    private val userRepository: UserRepository
 ) {
 
-    fun createUser(userId:String,password:String):User{
+    fun createUser(userId: String, password: String): User {
         val newUser = User(userId = userId, password = password)
-        return  userRepository.save(newUser)
+        return userRepository.save(newUser)
     }
 
+    fun login(userId: String, password: String): User {
+        val targetUser = userRepository.findByUserId(userId) ?: throw UserNotFoundException("User with ID $userId not found")
 
-    fun login(userId:String,password:String):User{
-        val targetUser = userRepository.findByUserId(userId)     ?: throw UserNotFoundException("User with ID $userId not found")
-
-
-        return  targetUser
+        return targetUser
     }
-
 }

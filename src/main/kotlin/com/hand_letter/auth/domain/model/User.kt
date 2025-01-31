@@ -10,16 +10,16 @@ data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    val id:Long = 0,
+    val id: Long = 0,
 
     @Column(name = "user_id", unique = true)
-    val userId:String,
+    val userId: String,
 
     @Column(name = "password")
-    val password:String,
+    val password: String,
 
     @CreatedDate
     @Column(name = "create_date")
-    val createDate:LocalDateTime = LocalDateTime.now()
+    val createDate: LocalDateTime = LocalDateTime.now()
 
 )

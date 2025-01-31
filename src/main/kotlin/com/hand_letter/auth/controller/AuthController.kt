@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RestController
 class AuthController(private val authService: AuthService) {
 
     @PostMapping
-    fun createUser(@RequestBody userRequestDTO: UserRequestDTO):User{
-         return  authService.createUser(userRequestDTO.userId,userRequestDTO.password)
+    fun createUser(@RequestBody userRequestDTO: UserRequestDTO): User {
+        return authService.createUser(userRequestDTO.userId, userRequestDTO.password)
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody userRequestDTO: UserRequestDTO):User{
-            return  authService.login(userId = userRequestDTO.userId, password = userRequestDTO.password)
+    fun login(@RequestBody userRequestDTO: UserRequestDTO): User {
+        return authService.login(userId = userRequestDTO.userId, password = userRequestDTO.password)
     }
-
 }

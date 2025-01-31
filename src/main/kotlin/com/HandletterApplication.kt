@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class HandletterApplication
 
 fun main(args: Array<String>) {
-	runApplication<HandletterApplication>(*args)
+    runApplication<HandletterApplication>(*args)
 }

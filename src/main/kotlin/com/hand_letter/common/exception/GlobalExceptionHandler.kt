@@ -17,11 +17,8 @@ class GlobalExceptionHandler {
         return ResponseEntity(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR)
     }
 
-
     data class ErrorResponse(
         val status: Int,
         val message: String
     )
-
-
 }
