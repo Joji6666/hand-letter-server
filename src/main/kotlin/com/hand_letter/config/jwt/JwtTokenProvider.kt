@@ -52,12 +52,18 @@ class JwtTokenProvider(@Lazy private val userDetailsService: UserDetailsService)
         }
     }
 
-    fun resolveToken(req: HttpServletRequest): String? {
-        val bearerToken = req.getHeader("Authorization")
-        return if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            bearerToken.substring(7)
-        } else {
-            null
+    fun resolveToken(request: HttpServletRequest): String? {
+        val cookies = request.cookies
+
+        if (cookies == null) {
+            println("🚨 No cookies found in the request!")
+            return null
         }
+
+        cookies.forEach { cookie ->
+            println("🔹 Cookie: ${cookie.name} = ${cookie.value}")
+        }
+
+        return cookies.firstOrNull { it.name == "token" }?.value
     }
 }

@@ -1,5 +1,7 @@
 package com.hand_letter.project.domain.model
 
+import com.hand_letter.project.dto.ProjectRequestDTO
+import com.hand_letter.project.dto.ProjectResponseDTO
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
@@ -23,8 +25,7 @@ class Project(
         private set
 
     @Column(name = "create_user_id")
-    var createUserId: Long = createUserId
-        private set
+    val createUserId: Long = createUserId
 
     @Column(name = "effect")
     var effect: String = effect
@@ -37,4 +38,19 @@ class Project(
     @CreatedDate
     @Column(name = "create_date")
     val createDate: LocalDateTime = LocalDateTime.now()
+
+    fun updateProject(projectRequestDTO: ProjectRequestDTO) {
+        this.effect = projectRequestDTO.effect
+        this.url = projectRequestDTO.url
+    }
+
+    fun convertToDTO(project: Project): ProjectResponseDTO {
+        return ProjectResponseDTO(
+            id = project.id,
+            url = project.url,
+            endDate = project.endDate,
+            effect = project.effect,
+            createUserId = project.createUserId
+        )
+    }
 }

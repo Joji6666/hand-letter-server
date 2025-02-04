@@ -27,4 +27,8 @@ class User(
     @CreatedDate
     @Column(name = "create_date")
     val createDate: LocalDateTime = createDate
+
+    fun updatePassword(password: String) {
+        this.password = password
+    }
 }

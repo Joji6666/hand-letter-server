@@ -1,5 +1,7 @@
 package com.hand_letter.project.domain.model
 
+import com.hand_letter.project.dto.ProjectContentRequestDTO
+import com.hand_letter.project.dto.ProjectContentResponseDTO
 import jakarta.persistence.*
 
 @Entity
@@ -52,4 +54,28 @@ class ProjectContent(
     @Column(name = "animation")
     var animation: String = animation
         private set
+
+    fun updateProjectContent(projectContentRequestDTO: ProjectContentRequestDTO) {
+        this.type = projectContentRequestDTO.type
+        this.content = projectContentRequestDTO.content
+        this.subContent = projectContentRequestDTO.subContent
+        this.backgroundColor = projectContentRequestDTO.backgroundColor
+        this.font = projectContentRequestDTO.font
+        this.fontSize = projectContentRequestDTO.fontSize
+        this.animation = projectContentRequestDTO.animation
+    }
+
+    fun convertToDTO(projectContent: ProjectContent): ProjectContentResponseDTO {
+        return ProjectContentResponseDTO(
+            id = projectContent.id,
+            type = projectContent.type,
+            content = projectContent.content,
+            subContent = projectContent.subContent,
+            backgroundColor = projectContent.backgroundColor,
+            font = projectContent.font,
+            fontSize = projectContent.fontSize,
+            animation = projectContent.animation
+
+        )
+    }
 }
