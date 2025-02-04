@@ -39,4 +39,7 @@ out/
 ### Kotlin ###
 .kotlin
 
-.properties
+# 환경 설정 파일 (개발 및 운영 서버 환경 변수 포함)
+application.properties
+application.yml
+.env
